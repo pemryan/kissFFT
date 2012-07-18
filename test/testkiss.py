@@ -92,7 +92,7 @@ def test_fft(ndims):
     
     open('/tmp/fftexp.dat','w').write(dopack( flatten(xver) , True ) )
 
-    x2=dofft(x)
+    x2=dofft(x,doreal)
     err = xver - x2
     errf = flatten(err)
     xverf = flatten(xver)
@@ -107,10 +107,9 @@ def test_fft(ndims):
         print 'err',err
         sys.exit(1)
  
-def dofft(x):
+def dofft(x,isreal):
     dims=list( numpy.shape(x) )
     x = flatten(x)
-    iscomp = (all(x.conj()==x)==False)
 
     scale=1
     if datatype=='int16_t':
@@ -128,9 +127,9 @@ def dofft(x):
     print cmd
     p = popen2.Popen3(cmd )
 
-    open('/tmp/fftin.dat','w').write(dopack( x , iscomp ) )
+    open('/tmp/fftin.dat','w').write(dopack( x , isreal==False ) )
 
-    p.tochild.write( dopack( x , iscomp ) )
+    p.tochild.write( dopack( x , isreal==False ) )
     p.tochild.close()
 
     res = dounpack( p.fromchild.read() , 1 )
