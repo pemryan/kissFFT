@@ -7,7 +7,7 @@ CFLAGS=-O3 -I.. -I../tools $(WARNINGS)
 CFLAGS+=-ffast-math -fomit-frame-pointer 
 #CFLAGS+=-funroll-loops
 #CFLAGS+=-march=prescott 
-CFLAGS+= -mtune=native 
+#CFLAGS+= -mtune=native 
 # TIP: try adding -openmp or -fopenmp  to enable OPENMP directives and use of multiple cores
 #CFLAGS+=-fopenmp
 CFLAGS+= $(CFLAGADD)
